@@ -1,32 +1,24 @@
-import { useEffect, useState } from "react";
-import Loading from "./Loading";
-import Card from "./Card";
+import React from 'react'
+import Nav from './Nav'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import About from './About'
+import Contact from './Contact'
 const App = () => {
-  const [data, setdata] = useState([]);
-  const [loading, setloading] = useState(true);
-
-  const MainF = async () => {
-    try {
-      const func = await fetch("https://api.github.com/users");
-      setdata(await func.json());
-      setloading(false);
-    } catch (error) {
-      console.log("my Error is " + error);
-    }
-  };
-
-  useEffect(() => {
-    MainF();
-  }, []);
-
-  if (loading) {
-    return <Loading />;
-  }
-
   return (
-    <>
-      <Card data={data} />
-    </>
-  );
-};
-export default App;
+<>
+<Router>
+  <Nav/>
+  <Routes>
+     <Route path='/'/>
+    <Route path='/about' element={<About/>}/>
+    <Route path='/contact' element={<Contact/>}/>
+
+
+
+  </Routes>
+</Router>
+</>
+    )
+}
+
+export default App
